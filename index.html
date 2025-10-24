@@ -471,9 +471,9 @@
         .verdiq-section {
             background: linear-gradient(135deg, rgba(37, 99, 235, 0.03), rgba(16, 185, 129, 0.03));
             border-radius: 30px;
-            /* match other sections' horizontal padding and spacing */
             padding: 6rem 5%;
-            margin: 4rem 0;
+            max-width: 1400px;
+            margin: 4rem auto;
             position: relative;
             overflow: hidden;
             border: 1px solid var(--border);
@@ -490,14 +490,7 @@
             animation: rotate 20s linear infinite;
         }
 
-        /* Center the content inside the verdiq section to align with other sections */
         .verdiq-content {
-            /* rely on the parent <section> padding for horizontal spacing
-               to match other sections; avoid adding extra inner padding */
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-            padding: 0;
             position: relative;
             z-index: 1;
         }
