@@ -45,7 +45,7 @@
     .shape {
       position: absolute;
       opacity: 0.05;
-      animation: float 20s infinite ease-in-out;
+      animation: floatShapes 20s infinite ease-in-out;
     }
 
     .shape:nth-child(1) {
@@ -78,7 +78,7 @@
       animation-delay: 10s;
     }
 
-    @keyframes float {
+    @keyframes floatShapes {
       0%, 100% { transform: translate(0, 0) rotate(0deg); }
       33% { transform: translate(50px, -50px) rotate(120deg); }
       66% { transform: translate(-50px, 50px) rotate(240deg); }
@@ -181,7 +181,7 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 0 5%;
+      padding: 8rem 5% 4rem;
       position: relative;
       z-index: 1;
     }
@@ -190,95 +190,107 @@
       max-width: 1400px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.2fr 1fr;
       gap: 5rem;
       align-items: center;
       width: 100%;
     }
 
-    .hero-text {
+    .hero-content {
       animation: slideInLeft 1s ease;
     }
 
-    .hero-label {
-      display: inline-block;
-      padding: 0.5rem 1.5rem;
-      background: rgba(37, 99, 235, 0.1);
-      border: 1px solid var(--primary);
-      border-radius: 50px;
-      color: var(--primary);
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 2rem;
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      color: var(--dark);
     }
 
-    .hero-title {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 900;
-      margin-bottom: 1rem;
-      line-height: 1.1;
-      background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+    .hero-content .highlight {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero-subtitle {
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-size: 1.5rem;
       color: var(--gray);
-      margin-bottom: 2rem;
-      font-weight: 300;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
     }
 
     .hero-description {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: var(--gray);
       line-height: 1.8;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
       margin-bottom: 3rem;
     }
 
-    .hero-buttons {
+    .stat-item {
+      text-align: left;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-top: 0.5rem;
+    }
+
+    .cta-buttons {
       display: flex;
       gap: 1.5rem;
       flex-wrap: wrap;
     }
 
     .btn {
-      padding: 1rem 2.5rem;
-      border: none;
-      border-radius: 50px;
+      padding: 1rem 2rem;
+      border-radius: 12px;
       font-size: 1rem;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.3s;
       text-decoration: none;
-      display: inline-block;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .btn-primary {
       background: var(--primary);
       color: white;
-      box-shadow: 0 10px 40px rgba(37, 99, 235, 0.3);
+      border: 2px solid var(--primary);
     }
 
     .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 50px rgba(37, 99, 235, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
     }
 
     .btn-secondary {
       background: transparent;
       color: var(--dark);
-      border: 2px solid var(--dark);
+      border: 2px solid var(--border);
     }
 
     .btn-secondary:hover {
-      background: var(--dark);
-      color: white;
-      transform: translateY(-3px);
+      border-color: var(--primary);
+      color: var(--primary);
     }
 
     .hero-image-container {
@@ -305,18 +317,6 @@
       animation: pulse 3s infinite;
     }
 
-    /* Position badges relative to the image wrapper so they overlap the headshot */
-    .floating-badges {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      z-index: 6; /* sit above the hero image */
-      pointer-events: none;
-    }
-
     @keyframes pulse {
       0%, 100% { transform: scale(1); opacity: 0.3; }
       50% { transform: scale(1.05); opacity: 0.2; }
@@ -331,38 +331,48 @@
       z-index: 1;
     }
 
-    .badge {
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(20px);
-      padding: 1rem 1.5rem;
-      border-radius: 15px;
-      border: 1px solid var(--border);
+    .floating-card {
+      position: absolute;
+      background: var(--bg-light);
+      padding: 1.25rem 1.75rem;
+      border-radius: 16px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      animation: floatBadge 3s infinite ease-in-out;
-      z-index: 5;
+      border: 1px solid var(--border);
+      animation: float 3s ease-in-out infinite;
+      z-index: 10;
     }
 
-    .badge:nth-child(2) {
-      animation-delay: 1s;
+    .floating-card.card-1 {
+      top: 10%;
+      right: -10%;
+      animation-delay: 0s;
     }
 
-    .badge:nth-child(3) {
-      animation-delay: 2s;
+    .floating-card.card-2 {
+      bottom: 15%;
+      left: -10%;
+      animation-delay: 1.5s;
     }
 
-    @keyframes floatBadge {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
     }
 
-    .badge-icon {
-      font-size: 1.5rem;
+    .card-icon {
+      font-size: 2rem;
       margin-bottom: 0.5rem;
     }
 
-    .badge-text {
-      font-size: 0.9rem;
-      font-weight: 600;
+    .card-label {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-bottom: 0.25rem;
+    }
+
+    .card-value {
+      font-size: 1.1rem;
+      font-weight: 700;
       color: var(--primary);
     }
 
@@ -506,6 +516,7 @@
     .verdiq-content {
       position: relative;
       z-index: 1;
+      text-align: center;
     }
 
     @keyframes rotate {
@@ -535,6 +546,9 @@
       color: var(--gray);
       line-height: 1.8;
       margin-bottom: 3rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .products-grid {
@@ -743,7 +757,7 @@
         order: -1;
       }
 
-      .floating-badges {
+      .floating-card {
         display: none;
       }
 
@@ -802,30 +816,116 @@
       .nav-toggle.open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
       .verdiq-section {
-        padding: 2rem;
+        padding: 3rem 5%;
       }
 
-      .hero-buttons {
+      .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .cta-buttons {
         flex-direction: column;
       }
 
       .btn {
         width: 100%;
-        text-align: center;
+        justify-content: center;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-links {
+        flex-direction: column;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+      }
+
+      .hero-description {
+        font-size: 1rem;
+      }
+
+      .product-card {
+        padding: 1.5rem;
+      }
+
+      .product-name {
+        font-size: 1rem;
       }
     }
 
     @media (max-width: 480px) {
       /* Reduce big paddings and gaps on very small devices */
       section { padding: 3rem 4%; }
-      .hero { padding: 0 4%; }
-      .hero-container { gap: 1.5rem; }
+      .hero { padding: 6rem 4% 3rem; }
+      .hero-container { gap: 2rem; }
       .logo { font-size: 1.4rem; }
       .nav-toggle { width: 40px; height: 40px; }
       .nav-toggle .bar { width: 20px; }
-      .hero-label { font-size: 0.8rem; }
       .floating-shapes { display: none; }
-      .hero-image-wrapper { max-width: 380px; }
+      .hero-image-wrapper { max-width: 100%; }
+
+      .verdiq-section {
+        padding: 2rem 4%;
+        margin: 2rem 4%;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .verdiq-logo {
+        font-size: 2rem;
+      }
+
+      .verdiq-tagline {
+        font-size: 1.2rem;
+      }
+
+      .verdiq-description {
+        font-size: 1rem;
+      }
+
+      .skill-card {
+        padding: 2rem;
+      }
+
+      .skill-title {
+        font-size: 1.5rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+
+      .contact-link {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.5rem;
+      }
+
+      .product-name {
+        font-size: 0.95rem;
+      }
+
+      .product-desc {
+        font-size: 0.9rem;
+      }
     }
     /* Give sections a top offset to account for fixed nav when linking */
     section { scroll-margin-top: 90px; }
@@ -856,38 +956,54 @@
 
 <section class="hero">
   <div class="hero-container">
-    <div class="hero-text">
-      <div class="hero-label">🚀 Engineer · Innovator · Founder</div>
-      <h1 class="hero-title">Matthew Emmanuel Oduamafu</h1>
-      <p class="hero-subtitle">Mechatronics Engineer | Software Architect | Agritech CEO</p>
+    <div class="hero-content">
+      <h1>Building the <span class="highlight">Future of Agriculture</span> Through Technology</h1>
+      <p class="hero-subtitle">MSc Mechatronics Engineer | Software Architect | Agritech CEO</p>
       <p class="hero-description">
-        I design and build embedded systems, cloud-backed software, and AI-driven hardware. Currently pursuing an MSc in Mechatronics at Ashesi University while leading Verdiq Ltd — an agritech startup building locally-engineered tools for smarter farming.
+        I'm Matthew Oduamafu, bridging cutting-edge robotics and software engineering to solve real-world agricultural challenges across Africa.
+        Currently pursuing my MSc in Mechatronics at Ashesi University while developing Verdiq Ltd's AI-powered farming solutions.
       </p>
-      <div class="hero-buttons">
-        <a href="#verdiq" class="btn btn-primary">Discover Verdiq</a>
-        <a href="#contact" class="btn btn-secondary">Let's Connect</a>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">4+</div>
+          <div class="stat-label">Years in SE</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">10K+</div>
+          <div class="stat-label">Farmers by 2028</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">6</div>
+          <div class="stat-label">Smart Products</div>
+        </div>
+      </div>
+
+      <div class="cta-buttons">
+        <a href="#verdiq" class="btn btn-primary">
+          <span>Explore Verdiq</span>
+          <span>→</span>
+        </a>
+        <a href="#contact" class="btn btn-secondary">
+          <span>Get in Touch</span>
+        </a>
       </div>
     </div>
 
     <div class="hero-image-container">
       <div class="hero-image-wrapper">
         <div class="image-bg"></div>
-        <!-- moved badges inside the wrapper so they overlap the image -->
-        <div class="floating-badges">
-          <div class="badge">
-            <div class="badge-icon">🎓</div>
-            <div class="badge-text">MSc Mechatronics</div>
-          </div>
-          <div class="badge">
-            <div class="badge-icon">💻</div>
-            <div class="badge-text">4+ Years SE</div>
-          </div>
-          <div class="badge">
-            <div class="badge-icon">🌾</div>
-            <div class="badge-text">Verdiq CEO</div>
-          </div>
-        </div>
         <img src="https://raw.githubusercontent.com/Matthew-Oduamafu/personal-website-1/refs/heads/main/img/Matthew_Headshot.png" alt="Matthew Oduamafu" class="hero-image">
+      </div>
+      <div class="floating-card card-1">
+        <div class="card-icon">🎓</div>
+        <div class="card-label">Currently Pursuing</div>
+        <div class="card-value">MSc Mechatronics</div>
+      </div>
+      <div class="floating-card card-2">
+        <div class="card-icon">🚀</div>
+        <div class="card-label">Founder & CEO</div>
+        <div class="card-value">Verdiq Ltd</div>
       </div>
     </div>
   </div>
@@ -939,7 +1055,8 @@
     <div class="verdiq-tagline">"Smart Tools for Smarter Farming"</div>
 
     <p class="verdiq-description">
-      Ghana-based agritech startup in active R&D, designing the next generation of African agricultural technology. We're developing AI-powered, IoT-enabled farm equipment engineered specifically for African conditions. Currently in prototype and testing phase, building solutions that will replace outdated imports with locally-manufactured, sustainable alternatives.
+      Ghana-based agritech startup revolutionizing African agriculture with AI, IoT, and embedded systems.
+      Our mission: make Africa self-sufficient in sustainable agricultural technology.
     </p>
 
     <div class="stats-grid">
